@@ -94,7 +94,6 @@ public class Game {
     static void gameLoop() {
         counterOfMistake = 0;
         String wordForGuess = ChoiceOfWord.randomWord();
-        //System.out.println(wordForGuess);
         char[] charsOfWord = wordForGuess.toCharArray();
         char[] wordWithStars = makeSecretWord(wordForGuess);
         ArrayList <String> listOfWrongLetters = new ArrayList<>();
