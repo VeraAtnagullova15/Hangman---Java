@@ -10,7 +10,6 @@ public class Main {
             String response = scanner.nextLine();
             switch (response) {
                 case "1" -> {
-                    for (int i = 0; i<35; i++) System.out.println();
                     Game.gameLoop();
                 }
                 case "0" -> {
