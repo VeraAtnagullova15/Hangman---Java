@@ -3,6 +3,7 @@ import java.util.*;
 public class Game {
     static final int NUMBER_OF_MISTAKE = 6;
     static int counterOfMistake;
+    static String filename = "singular.txt";
 
     public static boolean inputLetterIsCorrect(String s) {
         if (s.length() == 1) {
@@ -93,7 +94,8 @@ public class Game {
 
     static void gameLoop() {
         counterOfMistake = 0;
-        String wordForGuess = ChoiceOfWord.randomWord();
+        String wordForGuess = ChoiceOfWord.randomWord(filename);
+        //System.out.println(wordForGuess);
         char[] charsOfWord = wordForGuess.toCharArray();
         char[] wordWithStars = makeSecretWord(wordForGuess);
         ArrayList <String> listOfWrongLetters = new ArrayList<>();
@@ -132,55 +134,3 @@ public class Game {
         }
     }
 }
-//
-//static void gameLoop() {
-//    String wordForGuess = ChoiceOfWord.randomWord();
-//    System.out.println(wordForGuess);
-//    char[] charsOfWord = wordForGuess.toCharArray();
-//    char[] wordWithStars = new char[charsOfWord.length]; // array to display the word with '*'
-//    for (int i = 0; i < wordWithStars.length; i++) {
-//        wordWithStars[i] = '*';
-//    }
-//    Scanner sc = new Scanner(System.in);
-//    System.out.println("Введите только одну букву русского алфавита");
-//    System.out.println();
-//    while (!wordIsGuessed(wordWithStars)) {
-//        String attemptGuess = sc.nextLine();
-//        char letter;
-//        int placeOfLetter;
-//        if (Game.inputLetterIsCorrect(attemptGuess)) {
-//            letter = attemptGuess.charAt(0);
-//        } else {
-//            System.out.println("Вы ввели некорректный символ или ввели несколько букв подряд\n");
-//            continue;
-//        }
-//        boolean foundLetter = false;
-//        String wrongLetter = "";
-//        ArrayList<String> listOfWrongLetters = new ArrayList<>();
-//        for (int i = 0; i < charsOfWord.length; i++) {
-//            if (charsOfWord[i] == letter) {
-//                placeOfLetter = i;
-//                wordWithStars[placeOfLetter] = letter;
-//                foundLetter = true;
-//            }
-//        }
-//        if (!foundLetter) {
-//            counterOfMistake++;
-//        }
-//        for (char symbol : wordWithStars) {
-//            System.out.print(symbol);
-//        }
-//        System.out.println();
-//        System.out.println("Допущено ошибок:" + counterOfMistake);
-//        System.out.println("Осталось ошибок:" + (NUMBER_OF_MISTAKE - counterOfMistake));
-//        PrintHangman.draw(counterOfMistake);
-//        if (counterOfMistake == NUMBER_OF_MISTAKE) {
-//            System.out.println("Вы проиграли.\nБыло загадано слово: " + wordForGuess);
-//            System.out.println();
-//            return;
-//        }
-//        if (wordIsGuessed(wordWithStars)) {
-//            System.out.println("Вы выиграли! Поздравляю!!!\n");
-//        }
-//    }
-//}
