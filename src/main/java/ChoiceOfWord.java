@@ -1,29 +1,33 @@
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class ChoiceOfWord {
 
-    public static String randomWord(String filename) {
+    static String choosingWordForGuess(String filename) {
         ClassLoader classLoader = Game.class.getClassLoader();
 
         InputStream inputStream = classLoader.getResourceAsStream(filename);
         if (inputStream == null) {
-            System.out.println("Файл не найден!");
+            String path = new File("src/main/resources/" + filename).getAbsolutePath();
+            System.out.println("Файл не удалось открыть!");
+            System.out.println("Файл должен находиться в папке:");
+            System.out.println(path);
+            System.out.println("Программа будет завершена!");
+
+            System.exit(1);
         }
         Scanner scanner = new Scanner(inputStream);
 
-        ArrayList<String> listWords = new ArrayList<>();
+        List<String> words = new ArrayList<>();
         while (scanner.hasNextLine()) {
-            listWords.add(scanner.nextLine().trim());
+            words.add(scanner.nextLine().trim());
         }
         scanner.close();
         Random random = new Random();
         String wordForGuess;
         while (true) {
-            wordForGuess = listWords.get(random.nextInt(0, listWords.size()));
-            if (wordForGuess.length() <= 10 && wordForGuess.length() >= 5 &&
+            wordForGuess = words.get(random.nextInt(0, words.size()));
+            if (wordForGuess.length() <= 8 && wordForGuess.length() >= 5 &&
                     !wordForGuess.endsWith("ый") && !wordForGuess.endsWith("ой") &&
                     !wordForGuess.endsWith("ий") && !wordForGuess.endsWith("ая") &&
                     !wordForGuess.endsWith("яя") && !wordForGuess.endsWith("ое") &&
@@ -36,8 +40,7 @@ public class ChoiceOfWord {
                     wordForGuess.indexOf("щ") == -1 && wordForGuess.indexOf("шка") == -1 &&
                     wordForGuess.indexOf("э") == -1) {
 
-                wordForGuess = wordForGuess.toLowerCase();
-                return wordForGuess;
+                return wordForGuess.toLowerCase();
             }
         }
     }

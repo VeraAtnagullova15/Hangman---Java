@@ -1,20 +1,20 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
+    private static final String START = "1";
+    private static final String QUIT = "0";
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        boolean play = true;
-        while (play) {
+        while (true) {
             System.out.println("Сыграем в \"Виселицу\"?");
-            System.out.println("Введите 1, если да, или 0, если нет.\n");
+            System.out.printf("Введите %s, если да, или %s, если нет.\n", START, QUIT);
             String response = scanner.nextLine();
             switch (response) {
-                case "1" -> {
+                case START -> {
                     Game.gameLoop();
                 }
-                case "0" -> {
+                case QUIT -> {
                     System.out.println("До новых встреч!\n");
-                    play = false;
                     return;
                 }
                 default -> System.out.println("Вы ввели некорректную команду\n");
